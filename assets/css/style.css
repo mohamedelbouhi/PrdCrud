@@ -1,0 +1,1149 @@
+/**
+ * ═══════════════════════════════════════════════════════════════
+ * FIRST PRDCRUD - ULTIMATE LUXURY EDITION
+ * نظام إدارة المنتجات الاحترافي - النسخة الخيالية
+ * ═══════════════════════════════════════════════════════════════
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   🎨 COLOR PALETTE - لوحة الألوان الفاخرة
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+    /* Primary Colors */
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent-glow: #818cf8;
+    --accent-vibrant: #6366f1;
+    --accent-gold: #fbbf24;
+    --accent-emerald: #10b981;
+
+    /* Background Colors */
+    --bg-deep: #0a0e1a;
+    --bg-card: #0f1629;
+    --bg-glass: rgba(15, 22, 41, 0.7);
+    --bg-glass-light: rgba(255, 255, 255, 0.03);
+
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    /* Border Colors */
+    --border-light: rgba(255, 255, 255, 0.08);
+    --border-active: rgba(129, 140, 248, 0.4);
+    --border-glow: rgba(129, 140, 248, 0.6);
+
+    /* Shadows */
+    --shadow-premium: 0 20px 60px -10px rgba(0, 0, 0, 0.8);
+    --shadow-glow: 0 0 40px rgba(129, 140, 248, 0.3);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🌟 GLOBAL STYLES - الأنماط العامة
+   ═══════════════════════════════════════════════════════════════ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Animated Gradient Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(129, 140, 248, 0.1) 0%, transparent 50%);
+    animation: gradientShift 20s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(5%, 5%) rotate(120deg);
+    }
+
+    66% {
+        transform: translate(-5%, 5%) rotate(240deg);
+    }
+}
+
+/* Floating Particles Effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 60% 70%, rgba(129, 140, 248, 0.3), transparent),
+        radial-gradient(1px 1px at 50% 50%, rgba(251, 191, 36, 0.3), transparent),
+        radial-gradient(1px 1px at 80% 10%, rgba(255, 255, 255, 0.3), transparent);
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    animation: particleFloat 30s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes particleFloat {
+
+    0%,
+    100% {
+        background-position: 0% 0%;
+        opacity: 0.4;
+    }
+
+    50% {
+        background-position: 100% 100%;
+        opacity: 0.6;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎯 NAVIGATION - شريط التنقل
+   ═══════════════════════════════════════════════════════════════ */
+.navbar {
+    padding: 2rem 0;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+}
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-glass);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.navbar:hover::before {
+    opacity: 1;
+}
+
+.navbar-brand {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #fff 0%, #818cf8 50%, #fbbf24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+    transition: var(--transition-smooth);
+    text-shadow: 0 0 30px rgba(129, 140, 248, 0.5);
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(129, 140, 248, 0.8));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   💎 BUTTONS - الأزرار الاحترافية
+   ═══════════════════════════════════════════════════════════════ */
+.btn {
+    border-radius: 18px;
+    padding: 16px 36px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    border: none;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* Ripple Effect */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-vibrant) 0%, #4338ca 100%);
+    box-shadow: 0 8px 20px -5px rgba(99, 102, 241, 0.5);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 35px -8px rgba(99, 102, 241, 0.7);
+    background: linear-gradient(135deg, #4338ca 0%, var(--accent-vibrant) 100%);
+}
+
+.btn-primary:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.btn-outline-danger {
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+    backdrop-filter: blur(10px);
+}
+
+.btn-outline-danger:hover {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--border-active);
+    transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   📝 FORM CONTROLS - عناصر النماذج
+   ═══════════════════════════════════════════════════════════════ */
+.form-label {
+    color: var(--text-secondary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    display: block;
+    transition: var(--transition-smooth);
+}
+
+.form-control {
+    background: var(--bg-card) !important;
+    border: 2px solid var(--border-light) !important;
+    border-radius: 20px !important;
+    padding: 20px 28px !important;
+    color: white !important;
+    font-size: 1.1rem !important;
+    transition: var(--transition-smooth) !important;
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.form-control:focus {
+    border-color: var(--accent-glow) !important;
+    box-shadow: 0 0 0 6px rgba(129, 140, 248, 0.15),
+        0 8px 20px rgba(129, 140, 248, 0.2) !important;
+    background: #161e31 !important;
+    transform: translateY(-2px);
+}
+
+.form-control:hover {
+    border-color: rgba(129, 140, 248, 0.3) !important;
+}
+
+/* Floating Label Effect */
+.form-group {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.form-group .form-label {
+    position: absolute;
+    top: 50%;
+    right: 28px;
+    transform: translateY(-50%);
+    transition: var(--transition-smooth);
+    pointer-events: none;
+    background: var(--bg-card);
+    padding: 0 8px;
+}
+
+.form-control:focus+.form-label,
+.form-control:not(:placeholder-shown)+.form-label {
+    top: 0;
+    font-size: 0.85rem;
+    color: var(--accent-glow);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎴 CARDS & CONTAINERS - الكروت والحاويات
+   ═══════════════════════════════════════════════════════════════ */
+.luxury-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.product-list-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 35px;
+    padding: 50px;
+    box-shadow: var(--shadow-premium);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.product-list-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+            rgba(129, 140, 248, 0.05) 0%,
+            transparent 50%,
+            rgba(251, 191, 36, 0.05) 100%);
+    opacity: 0;
+    transition: var(--transition-smooth);
+    pointer-events: none;
+}
+
+.product-list-card:hover::before {
+    opacity: 1;
+}
+
+.product-list-card:hover {
+    border-color: var(--border-active);
+    box-shadow: var(--shadow-premium), var(--shadow-glow);
+    transform: translateY(-5px);
+}
+
+/* Glass Card Effect */
+.glass-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border-light);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+    border-color: var(--border-active);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   📊 TABLE STYLES - أنماط الجداول
+   ═══════════════════════════════════════════════════════════════ */
+.table-header {
+    display: grid;
+    grid-template-columns: 0.8fr 2fr 1fr 1.2fr;
+    padding: 24px;
+    background: rgba(129, 140, 248, 0.05);
+    border-radius: 18px;
+    margin-bottom: 20px;
+    color: var(--accent-glow);
+    font-weight: 800;
+    font-size: 1.05rem;
+    border: 1px solid rgba(129, 140, 248, 0.1);
+}
+
+.product-row {
+    display: grid;
+    grid-template-columns: 0.8fr 2fr 1fr 1.2fr;
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--border-light);
+    transition: var(--transition-smooth);
+    align-items: center;
+    position: relative;
+}
+
+.product-row::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 0;
+    background: linear-gradient(180deg, var(--accent-glow), var(--accent-gold));
+    border-radius: 10px;
+    transition: var(--transition-smooth);
+}
+
+.product-row:hover::before {
+    height: 70%;
+}
+
+.product-row:hover {
+    background: rgba(129, 140, 248, 0.03);
+    border-radius: 22px;
+    transform: translateX(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.product-row:last-child {
+    border-bottom: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🔍 SEARCH BOX - شريط البحث
+   ═══════════════════════════════════════════════════════════════ */
+.search-box {
+    margin: 50px 0;
+    background: var(--bg-card);
+    border: 2px solid var(--border-light);
+    border-radius: 28px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.search-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(129, 140, 248, 0.1),
+            transparent);
+    transition: left 0.6s;
+}
+
+.search-box:focus-within::before {
+    left: 100%;
+}
+
+.search-box:focus-within {
+    border-color: var(--accent-glow);
+    box-shadow: 0 0 0 6px rgba(129, 140, 248, 0.15),
+        0 10px 30px rgba(129, 140, 248, 0.2);
+    transform: translateY(-3px);
+}
+
+.search-field {
+    background: transparent !important;
+    border: none !important;
+    padding: 22px 35px !important;
+    flex-grow: 1;
+    font-size: 1.15rem !important;
+    color: white !important;
+}
+
+.search-field:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.search-field::placeholder {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎭 MODAL SYSTEM - نظام المودال
+   ═══════════════════════════════════════════════════════════════ */
+.custom-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-smooth);
+}
+
+.custom-modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cinema-modal {
+    background: linear-gradient(135deg, #111a2e 0%, #0f1629 100%);
+    border: 2px solid var(--border-light);
+    border-radius: 40px;
+    padding: 60px;
+    width: 90%;
+    max-width: 550px;
+    text-align: center;
+    transform: translateY(50px) scale(0.8);
+    transition: var(--transition-bounce);
+    box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(129, 140, 248, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cinema-modal::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(129, 140, 248, 0.1) 0%, transparent 70%);
+    animation: modalGlow 3s ease-in-out infinite;
+}
+
+@keyframes modalGlow {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translate(10%, 10%);
+        opacity: 0.8;
+    }
+}
+
+.custom-modal-backdrop.active .cinema-modal {
+    transform: translateY(0) scale(1);
+}
+
+/* Success Checkmark Animation */
+.success-checkmark {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 35px;
+    position: relative;
+    animation: checkmarkPulse 2s ease-in-out infinite;
+}
+
+@keyframes checkmarkPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(16, 185, 129, 0);
+    }
+}
+
+.checkmark-svg {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #fff, var(--accent-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal-body {
+    color: var(--text-secondary);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 35px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ✨ ANIMATIONS - الأنيميشنز
+   ═══════════════════════════════════════════════════════════════ */
+.fade-up {
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Stagger Animation for Product Rows */
+.product-row:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.product-row:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.product-row:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.product-row:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.product-row:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎪 UTILITY CLASSES - فئات مساعدة
+   ═══════════════════════════════════════════════════════════════ */
+.hidden {
+    display: none !important;
+}
+
+.text-accent-gold {
+    color: var(--accent-gold);
+    font-weight: 800;
+}
+
+.text-accent-glow {
+    color: var(--accent-glow);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   📱 RESPONSIVE DESIGN - التصميم المتجاوب
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.8rem;
+    }
+
+    .luxury-container {
+        padding: 0 15px;
+    }
+
+    .product-list-card {
+        padding: 25px;
+        border-radius: 25px;
+    }
+
+    .table-header {
+        display: none;
+    }
+
+    .product-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 25px 20px;
+        border-radius: 20px;
+        margin-bottom: 15px;
+        border: 1px solid var(--border-light);
+    }
+
+    .product-row:hover {
+        transform: translateY(-3px);
+    }
+
+    .cinema-modal {
+        padding: 40px 30px;
+        border-radius: 30px;
+    }
+
+    .btn {
+        padding: 14px 28px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+
+    .product-list-card {
+        padding: 20px;
+    }
+
+    .form-control {
+        padding: 16px 20px !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎨 SCROLLBAR STYLING - تنسيق شريط التمرير
+   ═══════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--accent-vibrant), var(--accent-gold));
+    border-radius: 10px;
+    border: 2px solid var(--bg-deep);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--accent-gold), var(--accent-vibrant));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🌟 SPECIAL EFFECTS - تأثيرات خاصة
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════
+   🛠 UTILITIES & HELPER CLASSES
+   ═══════════════════════════════════════════════════════════════ */
+.ls-tighter {
+    letter-spacing: -2px;
+}
+
+.ls-tight {
+    letter-spacing: -1px;
+}
+
+.mb-60 {
+    margin-bottom: 60px;
+}
+
+.border-glow {
+    border-color: var(--accent-glow) !important;
+}
+
+.btn-custom-edit {
+    background: rgba(129, 140, 248, 0.1);
+    border: 1px solid var(--accent-glow);
+}
+
+.text-ltr {
+    direction: ltr;
+}
+
+.text-rtl {
+    direction: rtl;
+}
+
+.border-bottom-light {
+    border-bottom: 1px solid var(--border-light);
+}
+
+.text-danger-light {
+    color: #f87171;
+}
+
+.bg-disabled {
+    background: rgba(129, 140, 248, 0.05) !important;
+    cursor: not-allowed;
+}
+
+.bg-accent-faint {
+    background: rgba(129, 140, 248, 0.05);
+}
+
+.kbd-custom {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+/* Shimmer Effect for Loading */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(129, 140, 248, 0.2) 50%,
+            transparent 100%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Glow Text Effect */
+.glow-text {
+    text-shadow:
+        0 0 10px rgba(129, 140, 248, 0.5),
+        0 0 20px rgba(129, 140, 248, 0.3),
+        0 0 30px rgba(129, 140, 248, 0.2);
+}
+
+/* Ripple Effect for Buttons */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Fade Out Animation */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Bounce In Animation */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Shake Animation for Errors */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+/* Floating Animation */
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+/* Gradient Animation */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradientAnimation 3s ease infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎪 ADDITIONAL UTILITY CLASSES - فئات مساعدة إضافية
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Text Gradient */
+.text-gradient {
+    background: linear-gradient(135deg, var(--accent-glow), var(--accent-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Card Hover Lift */
+.hover-lift {
+    transition: var(--transition-smooth);
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-premium);
+}
+
+/* Blur Background */
+.blur-bg {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* No Select */
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+/* Smooth Transition */
+.smooth-transition {
+    transition: var(--transition-smooth);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   📱 ENHANCED RESPONSIVE DESIGN - تحسينات إضافية للتجاوب
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 992px) {
+    .luxury-container {
+        padding: 0 20px;
+    }
+
+    .glass-card {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+
+    .search-box {
+        margin: 30px 0;
+    }
+
+    .search-field {
+        padding: 18px 25px !important;
+        font-size: 1rem !important;
+    }
+
+    .cinema-modal {
+        padding: 35px 25px;
+        border-radius: 25px;
+    }
+
+    .success-checkmark {
+        width: 90px;
+        height: 90px;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+    }
+
+    .modal-body {
+        font-size: 1rem;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎨 PRINT STYLES - أنماط الطباعة
+   ═══════════════════════════════════════════════════════════════ */
+@media print {
+
+    body::before,
+    body::after,
+    .navbar,
+    .search-box,
+    .btn,
+    .page-loader {
+        display: none !important;
+    }
+
+    .product-list-card {
+        border: 1px solid #000;
+        box-shadow: none;
+    }
+
+    .product-row {
+        border-bottom: 1px solid #000;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🌈 ACCESSIBILITY IMPROVEMENTS - تحسينات إمكانية الوصول
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Focus Visible for Keyboard Navigation */
+*:focus-visible {
+    outline: 2px solid var(--accent-glow);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+/* Reduce Motion for Users Who Prefer */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-light: rgba(255, 255, 255, 0.3);
+        --border-active: rgba(129, 140, 248, 0.8);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   END OF STYLES
+   ═══════════════════════════════════════════════════════════════ */
